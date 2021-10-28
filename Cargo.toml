@@ -6,4 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-blotter = { git = "https://github.com/agausmann/blotter.rs.git" }
+anyhow = "1.0"
+# blotter = { git = "https://github.com/agausmann/blotter.rs.git" }
+blotter = { path = "../blotter.rs" }
+image = "0.23"
