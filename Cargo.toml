@@ -7,6 +7,5 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0"
-# blotter = { git = "https://github.com/agausmann/blotter.rs.git" }
-blotter = { path = "../blotter.rs" }
+blotter = { git = "https://github.com/agausmann/blotter.rs.git", rev = "8219f968" }
 image = "0.23"

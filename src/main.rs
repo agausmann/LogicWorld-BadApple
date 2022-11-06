@@ -8,7 +8,7 @@ use std::{
     process::exit,
 };
 
-use anyhow::bail;
+use anyhow::{anyhow, bail};
 use blotter::{BlotterFile, CircuitStates, Component, Input, Output, PegAddress, Wire};
 use image::{DynamicImage, GenericImageView, ImageBuffer, Pixel, Rgb, Rgba};
 
@@ -22,12 +22,14 @@ fn main() -> anyhow::Result<()> {
     };
 
     let mut reader = BufReader::new(File::open(&path)?);
-    let mut file = BlotterFile::read(&mut reader)?;
+    let mut file = BlotterFile::read(&mut reader)
+        .map_err(|e| anyhow!("cannot parse blotter file: {:?}", e))?;
 
     inject(&mut file)?;
 
     let mut writer = BufWriter::new(File::create(&path)?);
-    file.write(&mut writer)?;
+    file.write(&mut writer)
+        .map_err(|e| anyhow!("cannot write blotter file: {:?}", e))?;
     writer.flush()?;
 
     Ok(())
